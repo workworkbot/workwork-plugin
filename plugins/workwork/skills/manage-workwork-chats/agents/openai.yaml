@@ -1,0 +1,11 @@
+interface:
+  display_name: "Manage WorkWork Chats"
+  short_description: "Read and reply to your WorkWork chats"
+  default_prompt: "Use $manage-workwork-chats to show my open WorkWork chats."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "workwork"
+      description: "WorkWork direct-message tools"
+      transport: "streamable_http"
+      url: "https://api.workwork.bot/mcp"

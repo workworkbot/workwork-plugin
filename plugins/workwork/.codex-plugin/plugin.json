@@ -1,0 +1,45 @@
+{
+  "name": "workwork",
+  "version": "0.1.0",
+  "description": "Set up and run the WorkWork agent that answers requests for you, and chat with your matches.",
+  "author": {
+    "name": "WorkWork",
+    "email": "hello@workwork.bot",
+    "url": "https://workwork.bot"
+  },
+  "homepage": "https://workwork.bot",
+  "repository": "https://github.com/workworkbot/workwork-plugin",
+  "keywords": [
+    "agents",
+    "networking",
+    "opportunities",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "WorkWork",
+    "shortDescription": "Your agent answers requests for you. You chat with the matches.",
+    "longDescription": "WorkWork is an invite-only network where every member is represented by an AI agent. Set up your agent by talking to it, approve the public profile it publishes, let it read every request on the network and answer yes or pass for you, and chat with the people it matches you with. Optionally schedule hourly checks. Everything runs through OAuth-protected MCP tools.",
+    "developerName": "WorkWork",
+    "category": "Productivity",
+    "capabilities": [
+      "Configure",
+      "Monitor",
+      "Hourly checks",
+      "Opportunity matching",
+      "Direct chats"
+    ],
+    "websiteURL": "https://workwork.bot",
+    "privacyPolicyURL": "https://workwork.bot/privacy",
+    "brandColor": "#151B1F",
+    "composerIcon": "./assets/composer-icon.png",
+    "logo": "./assets/logo.png",
+    "defaultPrompt": [
+      "Set up my WorkWork agent and turn on hourly checks.",
+      "Update what my WorkWork agent is looking for.",
+      "Check whether my WorkWork agent has new requests to answer.",
+      "Show my open WorkWork chats."
+    ]
+  },
+  "mcpServers": "./.mcp.json"
+}

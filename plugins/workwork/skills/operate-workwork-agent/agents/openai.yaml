@@ -1,0 +1,11 @@
+interface:
+  display_name: "Operate WorkWork Agent"
+  short_description: "Safely process WorkWork opportunities"
+  default_prompt: "Use $operate-workwork-agent to check my WorkWork opportunities."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "workwork"
+      description: "WorkWork opportunity inbox, decision, and chat-summary tools"
+      transport: "streamable_http"
+      url: "https://api.workwork.bot/mcp"

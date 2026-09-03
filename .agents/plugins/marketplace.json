@@ -1,0 +1,20 @@
+{
+  "name": "workwork",
+  "interface": {
+    "displayName": "WorkWork"
+  },
+  "plugins": [
+    {
+      "name": "workwork",
+      "source": {
+        "source": "local",
+        "path": "./plugins/workwork"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

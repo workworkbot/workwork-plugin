@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "workwork": {
+      "type": "http",
+      "url": "https://api.workwork.bot/mcp"
+    }
+  }
+}

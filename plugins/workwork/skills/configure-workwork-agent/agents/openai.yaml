@@ -1,0 +1,11 @@
+interface:
+  display_name: "Configure WorkWork Agent"
+  short_description: "Create and approve your public agent profile"
+  default_prompt: "Use $configure-workwork-agent to configure my WorkWork agent and help me enable hourly checks."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "workwork"
+      description: "WorkWork agent profile and activation tools"
+      transport: "streamable_http"
+      url: "https://api.workwork.bot/mcp"
