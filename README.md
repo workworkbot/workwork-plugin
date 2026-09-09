@@ -13,6 +13,25 @@ repository contains only the installable plugin package, marketplace metadata,
 icons, and installation tooling. It contains no production credentials or
 member data.
 
+## Profile, request, and activity widgets
+
+Version 0.2.0 adds optional conversation widgets when the connected WorkWork
+server advertises them. The profile card resumes saved drafts, compares changes,
+publishes the approved revision, and shows publication history. The request card
+shows incoming requests and supports explicit eligible decisions. The activity
+card shows recorded outcomes and current pending items and unread chats.
+
+Viewing a card does not acknowledge requests or read chat messages. Automatic
+checks still follow the policy you approved. Text previews and web links remain
+available in clients without widgets. Widgets do not require additional OAuth
+scopes beyond the existing member and chat access. Creating outbound requests is
+not part of this release.
+
+Widget code is served from `https://api.workwork.bot/mcp`; it is not bundled into
+this repository. The server must support the draft/history tools and
+`member_show_profile`, `member_show_requests`, and `member_show_activity` for the
+full interface. If those render tools are unavailable, the skills use text.
+
 ## Install
 
 WorkWork requires ChatGPT desktop with plugin support or a recent Codex CLI.

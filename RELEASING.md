@@ -1,37 +1,45 @@
 # Releasing WorkWork
 
-This repository is prepared for distribution but must remain private until a
-WorkWork maintainer explicitly approves public visibility.
+This public repository distributes the reviewed plugin package. Widget resources
+and application state are served by WorkWork's authenticated MCP server.
 
-## Release checklist
+## Prepare the package
 
-1. Copy the reviewed plugin sources from the canonical WorkWork application
-   repository. Do not copy application code, environment files, logs, exports,
-   customer data, or credentials.
-2. Set a SemVer version in
-   `plugins/workwork/.codex-plugin/plugin.json` and add the corresponding entry
-   to `CHANGELOG.md`.
-3. Run:
+From a clean checkout of the reviewed application commit, run:
 
-   ```bash
-   python3 scripts/validate.py
-   bash -n scripts/install-workwork-plugin.sh
-   bash tests/test-installer.sh
-   ```
+```bash
+node scripts/export-workwork-plugin.mjs --target /path/to/workwork-plugin --version X.Y.Z
+node scripts/export-workwork-plugin.mjs --target /path/to/workwork-plugin --version X.Y.Z --write
+node scripts/export-workwork-plugin.mjs --target /path/to/workwork-plugin --version X.Y.Z --check
+```
 
-4. Test install, OAuth, all bundled skills, and an upgrade from the prior
-   release using a clean ChatGPT desktop or Codex profile.
-5. Confirm that `https://api.workwork.bot/mcp`, the website, support email, and
-   privacy-policy URL are production-ready.
-6. Decide and document the public-source license before making the repository
-   public. Absence of a license does not grant reuse rights.
-7. Tag the reviewed commit as `vX.Y.Z` and publish release notes.
-8. Sync `scripts/install-workwork-plugin.sh` to
-   `https://workwork.bot/install-workwork-plugin.sh` and verify that the served
-   file matches the tagged release.
-9. Change repository visibility only after explicit approval. Visibility is
-   not changed by any release or CI workflow in this repository.
+The first command lists proposed changes without writing. The exporter copies
+only the enumerated skills, MCP configuration, and public installer; it preserves
+this repository's identity, artwork, and release-owned documentation. It also
+records the application commit and file hashes in SOURCE.json. Do not copy the
+application tree, environment files, logs, credentials, or member data.
 
-For workspace pilots, keep the repository private and grant the importing
-GitHub account read access. Workspace admins can pin their import to a release
-tag or commit.
+## Validate and release
+
+1. Review the companion public PR and update the changelog and documentation.
+   Require SOURCE.json to identify the reviewed application commit with
+   sourceDirty=false. Set an ordinary release SemVer without a local cache suffix.
+2. Run `python3 scripts/validate.py`, `bash -n scripts/install-workwork-plugin.sh`,
+   and `bash tests/test-installer.sh`. Verify the SOURCE.json hashes.
+3. Deploy compatible server resources first. Enable MCP_WIDGETS_ENABLED for the
+   staged compatibility check before releasing widget instructions publicly.
+4. Test clean installation, OAuth, saved drafts across conversations, publication,
+   request actions, activity refresh, and an upgrade from the prior package in
+   ChatGPT. Test the text-only Codex workflow too. Do not change OAuth scopes for
+   this release.
+5. Confirm production MCP, website, support, and privacy links. Keep the previous
+   UI resource version available for existing conversations. Disabling widget
+   discovery must preserve the data tools and text/web workflow.
+6. Tag the reviewed package commit as vX.Y.Z and publish its release notes.
+7. Verify the installer hosted at https://workwork.bot/install-workwork-plugin.sh
+   matches this repository's scripts/install-workwork-plugin.sh. Its canonical
+   application source is scripts/install-workwork-plugin-public.sh; the separate
+   development installer is not the public release artifact.
+
+Repository visibility is not changed by release tooling. This procedure does not
+install plugins into a maintainer's personal profile automatically.

@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "sourceCommit": "60e91590019f2e4a6a9fea85581ffba1f97691a6",
+  "sourceDirty": false,
+  "files": {
+    "plugins/workwork/.mcp.json": "2282fc782109018f22b6946e980c9dcd0010ccc94ac2895f79b18bf9d5bbc09b",
+    "plugins/workwork/skills/configure-workwork-agent/SKILL.md": "5c722ba00a1ed92cf75b6cd40486170334d6c0d93482cecaf2bdfc07ca5a1c6f",
+    "plugins/workwork/skills/operate-workwork-agent/SKILL.md": "91e17e9e888fb532bda51406444f9ab38fdc5a28610bdecdc98811e6d9710480",
+    "plugins/workwork/skills/manage-workwork-chats/SKILL.md": "ba926ef9f592b583d78cd1dbf284ffca579c32cdd135cef343f6e09b857c53a8",
+    "scripts/install-workwork-plugin.sh": "7b03f4e8e5418be5676402a925400ff35668ecf2e453751f5bad0e16a851071f",
+    "plugins/workwork/.codex-plugin/plugin.json": "d0ed4212d2814022305a30d85b3b59924ccad385bc38c5491c9b171bb9860476"
+  }
+}
