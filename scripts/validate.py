@@ -5,6 +5,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import re
 import struct
 import sys
@@ -154,12 +155,34 @@ def validate_skills() -> None:
         require("description:" in content.split("---", 2)[1], f"Missing description in {skill_path.relative_to(ROOT)}")
 
 
+def validate_source() -> None:
+    source = load_json(ROOT / "SOURCE.json")
+    require(isinstance(source, dict), "SOURCE.json must be an object")
+    require(isinstance(source.get("sourceCommit"), str) and re.fullmatch(r"[a-f0-9]{40}", source["sourceCommit"]) is not None, "Missing application source commit")
+    require(isinstance(source.get("sourceDirty"), bool), "Missing source cleanliness marker")
+    require(source.get("version") == load_json(MANIFEST_PATH).get("version"), "Source version differs from manifest")
+    files = source.get("files")
+    expected = {
+        "plugins/workwork/.mcp.json", "plugins/workwork/.codex-plugin/plugin.json",
+        "scripts/install-workwork-plugin.sh",
+        *[f"plugins/workwork/skills/{name}/SKILL.md" for name in ("configure-workwork-agent", "operate-workwork-agent", "manage-workwork-chats")],
+    }
+    require(isinstance(files, dict) and set(files) == expected, "Unexpected exported file set")
+    for name, digest in files.items():
+        path = (ROOT / name).resolve()
+        require(path.is_relative_to(ROOT.resolve()), "Exported file escapes repository")
+        require(hashlib.sha256(path.read_bytes()).hexdigest() == digest, f"Exported file has drifted: {name}")
+    if source["sourceDirty"]:
+        print("Source checkout had local changes; regenerate from the reviewed clean commit before tagging.")
+
+
 def main() -> int:
     try:
         validate_marketplace()
         validate_manifest()
         validate_mcp()
         validate_skills()
+        validate_source()
     except (ValidationError, OSError) as exc:
         print(f"Validation failed: {exc}", file=sys.stderr)
         return 1

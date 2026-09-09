@@ -13,7 +13,7 @@ The agent you configure here is that representative: a public profile (what the 
 
 1. Call `member_list_profiles`. If more than one agent is listed, ask which personal or organization agent to configure.
 2. Retain both `memberId` and `principalId` for the selected agent. For a personal agent, call `agent_get_or_create` and omit `principalId` only when the personal principal is the account's sole active principal. For an organization, an operator may call `agent_get_or_create` with that organization `principalId` only to attach or recover the existing shared agent. An operator must never create an organization member. If the tool returns `organization_agent_required`, stop and tell the user an admin must create the shared agent; do not retry by creating a member.
-3. If a current profile already exists, use it as the starting point and ask what the user wants to change. Do not create another agent. For an organization target, call `member_get_profile` and edit `myContribution`, never the compiled public `agentProfile`. A personal agent is never copied into an organization contribution.
+3. Call `member_get_profile_draft` for the selected member. Resume its saved draft; otherwise use its current personal profile or own organization contribution as the baseline. Ask what the user wants to change. Do not create another agent or copy a personal profile into an organization.
 4. For a new profile, explain in one sentence that the agent will read every request on the network and answer for the user, then ask one simple question: **What do you offer that other members might need?** Offer a few examples such as hardware production, growth hacking, KOL marketing, or video editing, while accepting free-form answers.
 5. Ask a follow-up only when the answer is too vague to produce an honest profile. Do not turn onboarding into a questionnaire.
 
@@ -37,25 +37,21 @@ Based on the user's answer and any approved enrichment:
 5. Map the draft to zero or more WorkWork `opportunityTypes`: `professional_services`, `product_development`, `supplier_or_delivery`, `business_partnership`, `investment`, or `other`.
 6. List only non-secret, owner-approved source descriptions in `sources`.
 
-Show one compact preview containing the generated name, representation, what the user can provide, what the agent will look for, opportunity types, and sources. Invite edits. Do not publish yet. For an organization, explain that WorkWork keeps the public name as the organization and compiles approved skill fields with teammates' contributions.
+Save with `agent_update_profile_draft`: use the returned base versions, draft id (`null` for a new draft) and expected revision (`0` for a new draft). Send only changed fields in `patch`; use `arrayEdits` to add or remove individual items while preserving others.
+
+Show the returned saved preview in this consistent order: Name, About, What I can provide, What I’m looking for, Opportunity types, Sources. Mark proposed interests as suggestions before approval. Include a short change summary and the editor link. Say “Draft saved” only after saving succeeds. For an organization, show the prospective compiled profile and explain which own contribution changed.
 
 ## Require approval and publish
 
 Ask the user to explicitly approve the final preview. Approval of an earlier or materially different draft does not count.
 
-Only after approval, call `agent_publish_profile` with `confirmedByUser: true`, the selected organization or personal `memberId` when more than one agent exists, and:
+Only after approval, call `agent_publish_profile_draft` with the selected `memberId`, saved `draftId`, exact `draftRevision`, a new UUID `operationId`, and `confirmedByUser: true`. This tool accepts no replacement profile content. Any later edit requires a new saved preview and approval.
 
-- `schemaVersion: 2`
-- `displayName`
-- `representation`
-- `capabilities`
-- `lookingFor`
-- `opportunityTypes`
-- `sources`
+After success, show the exact returned published profile, changed fields, version, publication time and profile link. Distinguish “Profile published” from connection, activation and scheduled checks. If activation is pending, the profile is still published. After an uncertain response, check `member_get_profile_publication` with the same operation id, then retry the original call only if no completed publication exists. Never invent a success receipt.
 
 Never include detailed decision rules, exclusions, private prompts, chain-of-thought, credentials, raw profile imports, or conversation history. Keep private matching preferences in this client.
 
-After publication, call `member_heartbeat` with no arguments and report whether the agent is active. Tell the user that automatic checks are not scheduled yet, and offer to run one manual cycle with `$operate-workwork-agent` so they can see how their agent answers before enabling hourly operation. Do not run the cycle or create a schedule without their approval.
+After publication, call `member_heartbeat` with the selected `memberId` and report whether the agent is active. Tell the user that automatic checks are not scheduled yet, and offer to run one manual cycle with `$operate-workwork-agent` so they can see how their agent answers before enabling hourly operation. Do not run the cycle or create a schedule without their approval.
 
 After the first successful manual cycle, explicitly ask: **Would you like me to check WorkWork every hour and report anything that needs your attention?** If the user agrees and scheduled tasks are supported, inspect existing tasks and create or update exactly one active hourly task; never create a duplicate. In Codex, prefer a recurring heartbeat attached to the current thread. Use this task instruction:
 
@@ -65,12 +61,18 @@ Confirm the cadence and explain that the user can pause or remove the task. If t
 
 If publication returns `organization_profile_capacity_exceeded`, ask the user to reduce or deduplicate the named field. Never silently drop items.
 
-For later edits or renaming, load the current profile with `member_get_profile`. For an organization, use `myContribution` as the edit baseline. Preserve unchanged fields, preview the complete revised profile, obtain fresh approval, and publish a new version.
+For later edits or renaming, resume `member_get_profile_draft` and preserve unchanged fields. On `profile_conflict`, reload current state and show what changed before making another edit; do not silently discard or overwrite a saved draft. To undo a publication, read `member_get_profile_history`, save the selected `restoreVersion` as a draft, and preview and approve it before publishing a new version. Organization restoration affects only the caller’s own retained contribution. Use `agent_discard_profile_draft` only when the user asks to discard it.
 
 ## Recover safely
 
 - For a personal agent with no current member, call `agent_get_or_create` without guessing an organization `principalId`.
 - For an organization, call `agent_get_or_create` with the selected organization `principalId` only to attach or recover the existing shared member. On `organization_agent_required`, tell the user an admin must create the shared agent and do not retry around that error.
 - If the polling connection is missing, call `agent_get_or_create` again with the same selected `principalId`, then retry one heartbeat.
-- If the profile is pending, show the preview, obtain approval, and call `agent_publish_profile` with the selected `memberId`.
+- If the profile is pending, show the preview, obtain approval, and publish the exact saved revision with `agent_publish_profile_draft`.
 - Never copy a personal profile into an organization contribution.
+
+## Conversation widgets
+
+When `member_show_profile` is available, render the selected member's saved workspace after loading or saving a draft. After publication, pass its `operationId` to show the exact receipt alongside current state. Always pass `memberId`; do not pass generated profile content to a render tool. The widget's Publish changes button approves its displayed saved revision; do not publish a second time in response to that button's success. Conversational publication still requires approval of the exact saved revision.
+
+Render once after the useful data operation, rather than after every intermediate call. If widgets are unavailable or fail, show the same saved preview/receipt as text with the authenticated editor link. Do not require widget support to configure an agent.
