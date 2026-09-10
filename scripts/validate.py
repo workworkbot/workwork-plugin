@@ -15,9 +15,12 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 MARKETPLACE_PATH = ROOT / ".agents" / "plugins" / "marketplace.json"
+CLAUDE_MARKETPLACE_PATH = ROOT / ".claude-plugin" / "marketplace.json"
 PLUGIN_ROOT = ROOT / "plugins" / "workwork"
 MANIFEST_PATH = PLUGIN_ROOT / ".codex-plugin" / "plugin.json"
+CLAUDE_MANIFEST_PATH = PLUGIN_ROOT / ".claude-plugin" / "plugin.json"
 MCP_PATH = PLUGIN_ROOT / ".mcp.json"
+SEMVER_PATTERN = r"(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:[-+][0-9A-Za-z.-]+)?"
 
 
 class ValidationError(Exception):
@@ -69,6 +72,24 @@ def validate_marketplace() -> None:
     require(source.get("path") == "./plugins/workwork", "Marketplace path must be './plugins/workwork'")
 
 
+def validate_claude_marketplace() -> None:
+    marketplace = load_json(CLAUDE_MARKETPLACE_PATH)
+    require(isinstance(marketplace, dict), "Claude marketplace root must be an object")
+    require(marketplace.get("name") == "workwork", "Claude marketplace name must be 'workwork'")
+    require(isinstance(marketplace.get("owner"), dict), "Claude marketplace owner is required")
+    require(marketplace["owner"].get("name") == "WorkWork", "Claude marketplace owner must be WorkWork")
+
+    plugins = marketplace.get("plugins")
+    require(isinstance(plugins, list) and len(plugins) == 1, "Claude marketplace must contain one plugin")
+    entry = plugins[0]
+    require(isinstance(entry, dict), "Claude marketplace plugin entry must be an object")
+    require(entry.get("name") == "workwork", "Claude marketplace plugin name must be 'workwork'")
+    require(entry.get("source") == "./plugins/workwork", "Claude marketplace source must be './plugins/workwork'")
+    require((ROOT / entry["source"]).resolve() == PLUGIN_ROOT.resolve(), "Claude marketplace source is incorrect")
+    require(entry.get("category") == "Productivity", "Claude plugin category must be 'Productivity'")
+    require(entry.get("version") == marketplace.get("version"), "Claude marketplace and plugin entry versions differ")
+
+
 def validate_url(value: object, field: str, expected_host: str | None = None) -> None:
     require(isinstance(value, str), f"{field} must be a URL string")
     parsed = urlparse(value)
@@ -97,7 +118,7 @@ def validate_manifest() -> None:
     require(
         isinstance(version, str)
         and re.fullmatch(
-            r"(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:[-+][0-9A-Za-z.-]+)?",
+            SEMVER_PATTERN,
             version,
         ),
         "Plugin version must be SemVer",
@@ -122,6 +143,27 @@ def validate_manifest() -> None:
     logo = resolve_plugin_path(interface.get("logo", ""))
     validate_png(composer_icon, 128)
     validate_png(logo, 512)
+
+
+def validate_claude_manifest() -> None:
+    manifest = load_json(CLAUDE_MANIFEST_PATH)
+    require(isinstance(manifest, dict), "Claude plugin manifest root must be an object")
+    require(manifest.get("name") == "workwork", "Claude plugin manifest name must be 'workwork'")
+    require(manifest.get("displayName") == "WorkWork", "Claude plugin displayName must be 'WorkWork'")
+    require(
+        isinstance(manifest.get("version"), str) and re.fullmatch(SEMVER_PATTERN, manifest["version"]) is not None,
+        "Claude plugin version must be SemVer",
+    )
+    require(manifest.get("version") == load_json(MANIFEST_PATH).get("version"), "Claude and OpenAI plugin versions differ")
+    require(manifest.get("version") == load_json(CLAUDE_MARKETPLACE_PATH).get("version"), "Claude marketplace and manifest versions differ")
+    require(bool(manifest.get("description")), "Claude plugin description is required")
+    require(manifest.get("repository") == "https://github.com/workworkbot/workwork-plugin", "Claude repository URL is incorrect")
+    validate_url(manifest.get("homepage"), "Claude homepage", "workwork.bot")
+
+    for field in ("skills", "mcpServers"):
+        value = manifest.get(field)
+        require(isinstance(value, str), f"Claude manifest field {field} is required")
+        require(resolve_plugin_path(value).exists(), f"Claude manifest path does not exist: {value}")
 
 
 def validate_mcp() -> None:
@@ -163,8 +205,10 @@ def validate_source() -> None:
     require(source.get("version") == load_json(MANIFEST_PATH).get("version"), "Source version differs from manifest")
     files = source.get("files")
     expected = {
+        ".claude-plugin/marketplace.json",
         "plugins/workwork/.mcp.json", "plugins/workwork/.codex-plugin/plugin.json",
-        "scripts/install-workwork-plugin.sh",
+        "plugins/workwork/.claude-plugin/plugin.json",
+        "scripts/install-workwork-plugin.sh", "scripts/package-workwork-claude-plugin.mjs",
         *[f"plugins/workwork/skills/{name}/SKILL.md" for name in ("configure-workwork-agent", "operate-workwork-agent", "manage-workwork-chats")],
     }
     require(isinstance(files, dict) and set(files) == expected, "Unexpected exported file set")
@@ -172,17 +216,36 @@ def validate_source() -> None:
         path = (ROOT / name).resolve()
         require(path.is_relative_to(ROOT.resolve()), "Exported file escapes repository")
         require(hashlib.sha256(path.read_bytes()).hexdigest() == digest, f"Exported file has drifted: {name}")
-    if source["sourceDirty"]:
-        print("Source checkout had local changes; regenerate from the reviewed clean commit before tagging.")
+    require(source["sourceDirty"] is False, "Source checkout had local changes; regenerate from the reviewed clean commit")
+
+
+def validate_no_common_secrets() -> None:
+    patterns = {
+        "private key": re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
+        "GitHub token": re.compile(r"(?:github_pat_|ghp_)[A-Za-z0-9_]{20,}"),
+        "OpenAI-style secret": re.compile(r"sk-[A-Za-z0-9]{20,}"),
+        "AWS access key": re.compile(r"AKIA[A-Z0-9]{16}"),
+        "credential-bearing URL": re.compile(r"https?://[^\s/:]+:[^\s/@]+@"),
+    }
+    text_suffixes = {"", ".json", ".md", ".mjs", ".py", ".sh", ".txt", ".yaml", ".yml"}
+    for path in ROOT.rglob("*"):
+        if not path.is_file() or ".git" in path.parts or path.suffix not in text_suffixes:
+            continue
+        content = path.read_text(encoding="utf-8")
+        for label, pattern in patterns.items():
+            require(pattern.search(content) is None, f"Possible {label} in public file: {path.relative_to(ROOT)}")
 
 
 def main() -> int:
     try:
         validate_marketplace()
+        validate_claude_marketplace()
         validate_manifest()
+        validate_claude_manifest()
         validate_mcp()
         validate_skills()
         validate_source()
+        validate_no_common_secrets()
     except (ValidationError, OSError) as exc:
         print(f"Validation failed: {exc}", file=sys.stderr)
         return 1

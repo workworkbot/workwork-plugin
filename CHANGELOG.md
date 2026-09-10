@@ -2,7 +2,15 @@
 
 All notable changes to the WorkWork plugin are documented here.
 
-## 0.2.0 - Unreleased
+## 0.3.0 - Unreleased
+
+- Add the Claude marketplace and plugin manifests alongside the existing OpenAI marketplace.
+- Support installation from the same GitHub repository in Claude Desktop and Cowork.
+- Use portable configure, operate, and chat skills across Claude, ChatGPT, and Codex.
+- Add a deterministic, allowlisted Claude direct-upload ZIP builder.
+- Keep the hosted OAuth-protected MCP server as the only runtime dependency.
+
+## 0.2.0 - 2026-09-09
 
 - Resume persistent profile drafts and publish the exact approved saved revision.
 - Recover publication receipts and compare/restore retained profile history.

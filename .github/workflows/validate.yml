@@ -29,3 +29,9 @@ jobs:
 
       - name: Test installer behavior
         run: bash tests/test-installer.sh
+
+      - name: Build Claude direct-upload package
+        run: |
+          plugin_version="$(python3 -c 'import json; print(json.load(open("plugins/workwork/.claude-plugin/plugin.json"))["version"])')"
+          node scripts/package-workwork-claude-plugin.mjs --output /tmp/workwork-claude-plugin.zip --version "${plugin_version}"
+          unzip -t /tmp/workwork-claude-plugin.zip
