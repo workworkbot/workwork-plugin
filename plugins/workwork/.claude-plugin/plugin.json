@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "workwork",
+  "displayName": "WorkWork",
+  "version": "0.3.0",
+  "description": "Set up and run the WorkWork agent that answers requests for you, and chat with your matches.",
+  "author": {
+    "name": "WorkWork",
+    "email": "hello@workwork.bot",
+    "url": "https://workwork.bot"
+  },
+  "homepage": "https://workwork.bot",
+  "repository": "https://github.com/workworkbot/workwork-plugin",
+  "keywords": [
+    "agents",
+    "networking",
+    "opportunities",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json"
+}

@@ -1,13 +1,16 @@
 {
-  "version": "0.2.0",
-  "sourceCommit": "60e91590019f2e4a6a9fea85581ffba1f97691a6",
+  "version": "0.3.0",
+  "sourceCommit": "3e393f6e58840a95f9b2e2aed6a8b6022efb2584",
   "sourceDirty": false,
   "files": {
+    ".claude-plugin/marketplace.json": "b47dc265bd3c6d4956d49d9cd27e673e55d7de67932d409e8ae1da12fb1ce6ea",
     "plugins/workwork/.mcp.json": "2282fc782109018f22b6946e980c9dcd0010ccc94ac2895f79b18bf9d5bbc09b",
-    "plugins/workwork/skills/configure-workwork-agent/SKILL.md": "5c722ba00a1ed92cf75b6cd40486170334d6c0d93482cecaf2bdfc07ca5a1c6f",
-    "plugins/workwork/skills/operate-workwork-agent/SKILL.md": "91e17e9e888fb532bda51406444f9ab38fdc5a28610bdecdc98811e6d9710480",
+    "plugins/workwork/.claude-plugin/plugin.json": "6630195c980a98d318040e4f8e2950d8323b812a52d311d6fb4dd494b675e574",
+    "plugins/workwork/skills/configure-workwork-agent/SKILL.md": "46728fffb7c58483fc62f4097a8fe848bd6aa61310c35cde565966ab39d85b8a",
+    "plugins/workwork/skills/operate-workwork-agent/SKILL.md": "c9cdba4431292bc3b70e4dfff3e72598246a53016ddde082cb887d977abd8feb",
     "plugins/workwork/skills/manage-workwork-chats/SKILL.md": "ba926ef9f592b583d78cd1dbf284ffca579c32cdd135cef343f6e09b857c53a8",
     "scripts/install-workwork-plugin.sh": "7b03f4e8e5418be5676402a925400ff35668ecf2e453751f5bad0e16a851071f",
-    "plugins/workwork/.codex-plugin/plugin.json": "d0ed4212d2814022305a30d85b3b59924ccad385bc38c5491c9b171bb9860476"
+    "scripts/package-workwork-claude-plugin.mjs": "cd5d392b0460dd3a51cf15644335a302c05ef9b760486309363d67171c2edcb7",
+    "plugins/workwork/.codex-plugin/plugin.json": "49891ca8eb9ee96a2293ad091b71a3c33a6ab143efdc244ebe83c62c9672e3ea"
   }
 }

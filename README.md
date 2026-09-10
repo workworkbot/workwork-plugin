@@ -1,8 +1,8 @@
 # WorkWork plugin
 
-The official distribution repository for the WorkWork plugin for ChatGPT and
-Codex. The plugin bundles three guided workflows with the OAuth-protected
-WorkWork MCP server:
+The official distribution repository for the WorkWork plugin for Claude,
+ChatGPT, and Codex. The plugin bundles three guided workflows with the
+OAuth-protected WorkWork MCP server:
 
 - configure a personal or organization WorkWork agent;
 - safely process network requests and scheduled checks;
@@ -32,10 +32,26 @@ this repository. The server must support the draft/history tools and
 `member_show_profile`, `member_show_requests`, and `member_show_activity` for the
 full interface. If those render tools are unavailable, the skills use text.
 
-## Install
+## Install in Claude
 
-WorkWork requires ChatGPT desktop with plugin support or a recent Codex CLI.
-On macOS or Linux, run:
+In Claude Desktop, open **Customize → Plugins → Add → Add marketplace** and add:
+
+```text
+https://github.com/workworkbot/workwork-plugin
+```
+
+Install **WorkWork**, start a new chat, and ask:
+
+> Set up my WorkWork agent and turn on hourly checks.
+
+Claude asks you to sign in to WorkWork when it connects the hosted MCP server.
+No local server or command-line setup is required. The same marketplace also
+works in Claude Cowork.
+
+## Install in ChatGPT or Codex
+
+WorkWork requires ChatGPT desktop with plugin support or a recent Codex CLI. On
+macOS or Linux, run:
 
 ```bash
 curl --proto '=https' --tlsv1.2 -fsSL \
@@ -50,16 +66,15 @@ The installer uses the Codex executable bundled with ChatGPT desktop on macOS
 when available. Otherwise it uses a compatible `codex` executable on `PATH`.
 Git is also required.
 
-### Install from this private repository
+### Install from a checkout
 
-Until this repository is public, testers need GitHub read access. Clone it and
-run:
+You can also clone this repository and run:
 
 ```bash
 ./scripts/install-workwork-plugin.sh
 ```
 
-If HTTPS Git authentication is not configured, use the SSH source explicitly:
+To test over SSH, set the marketplace source explicitly:
 
 ```bash
 WORKWORK_MARKETPLACE_SOURCE=git@github.com:workworkbot/workwork-plugin.git \
@@ -80,8 +95,7 @@ https://github.com/workworkbot/workwork-plugin
 
 Leave **Path** empty because `.agents/plugins/marketplace.json` is at the
 repository root. Leave **Branch, tag, or commit** empty to follow `main`, or
-select a release tag for a pinned rollout. Private imports require a GitHub
-account that can read this repository.
+select a release tag for a pinned rollout.
 
 See OpenAI's documentation for [plugin packaging](https://developers.openai.com/plugins/build/plugins)
 and [workspace marketplace imports](https://learn.chatgpt.com/docs/enterprise/plugin-management).
@@ -89,12 +103,15 @@ and [workspace marketplace imports](https://learn.chatgpt.com/docs/enterprise/pl
 ## Repository layout
 
 ```text
-.agents/plugins/marketplace.json       Marketplace catalog
-plugins/workwork/.codex-plugin/        Plugin manifest
+.agents/plugins/marketplace.json       OpenAI marketplace catalog
+.claude-plugin/marketplace.json        Claude marketplace catalog
+plugins/workwork/.codex-plugin/        OpenAI plugin manifest
+plugins/workwork/.claude-plugin/       Claude plugin manifest
 plugins/workwork/.mcp.json             WorkWork MCP connection
 plugins/workwork/skills/               Bundled workflows
 plugins/workwork/assets/               Install-surface artwork
 scripts/install-workwork-plugin.sh     Individual-user installer
+scripts/package-workwork-claude-plugin.mjs  Direct-upload ZIP builder
 scripts/validate.py                    Dependency-free repository validation
 ```
 
@@ -104,6 +121,9 @@ scripts/validate.py                    Dependency-free repository validation
 python3 scripts/validate.py
 bash -n scripts/install-workwork-plugin.sh
 bash tests/test-installer.sh
+node scripts/package-workwork-claude-plugin.mjs \
+  --output /tmp/workwork-claude-plugin.zip \
+  --version 0.3.0
 ```
 
 CI runs the same checks for every push and pull request. See
