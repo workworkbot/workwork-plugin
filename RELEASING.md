@@ -20,6 +20,14 @@ artwork, and release-owned documentation. It also records the application commit
 and file hashes in SOURCE.json. Do not copy the application tree, environment
 files, logs, credentials, or member data.
 
+## Claude directory review
+
+Use `DIRECTORY.md` for listing copy, data disclosure, and the reviewer walkthrough.
+Run `claude plugin validate plugins/workwork` and validate the marketplace too.
+The candidate was submitted during preparation and is pending review. Complete
+the remaining live acceptance and reviewer access before releasing. After directory acceptance, repository updates may be mirrored
+automatically; keep version bumps and source provenance in the release PR.
+
 ## Validate and release
 
 1. Review the companion public PR and update the changelog and documentation.

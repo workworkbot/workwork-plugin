@@ -21,6 +21,16 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Validate Claude manifests with official CLI
+        run: |
+          npx --yes --package @anthropic-ai/claude-code@2.1.272 claude plugin validate plugins/workwork
+          npx --yes --package @anthropic-ai/claude-code@2.1.272 claude plugin validate .claude-plugin/marketplace.json
+
       - name: Validate marketplace and plugin
         run: python3 scripts/validate.py
 

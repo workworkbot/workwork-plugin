@@ -1,16 +1,18 @@
 {
-  "version": "0.3.0",
-  "sourceCommit": "3e393f6e58840a95f9b2e2aed6a8b6022efb2584",
+  "version": "0.3.1",
+  "sourceCommit": "5c8ed8931c213c08bf9c7cac4166ca65b63e440e",
   "sourceDirty": false,
   "files": {
-    ".claude-plugin/marketplace.json": "b47dc265bd3c6d4956d49d9cd27e673e55d7de67932d409e8ae1da12fb1ce6ea",
+    ".claude-plugin/marketplace.json": "195f89e9bb036beced408cb76dad3a01fa151580831b14af20c1f35db44c5e4d",
     "plugins/workwork/.mcp.json": "2282fc782109018f22b6946e980c9dcd0010ccc94ac2895f79b18bf9d5bbc09b",
-    "plugins/workwork/.claude-plugin/plugin.json": "6630195c980a98d318040e4f8e2950d8323b812a52d311d6fb4dd494b675e574",
-    "plugins/workwork/skills/configure-workwork-agent/SKILL.md": "46728fffb7c58483fc62f4097a8fe848bd6aa61310c35cde565966ab39d85b8a",
-    "plugins/workwork/skills/operate-workwork-agent/SKILL.md": "c9cdba4431292bc3b70e4dfff3e72598246a53016ddde082cb887d977abd8feb",
+    "plugins/workwork/.claude-plugin/plugin.json": "b1247c0594654a7478abee3c40ce3e57fc3f356218e9c0429036894eefbcd102",
+    "plugins/workwork/skills/configure-workwork-agent/SKILL.md": "70b5db6ff826d8464784bfa0209927784a1d87f865e02785ed101471424cf3c7",
+    "plugins/workwork/skills/operate-workwork-agent/SKILL.md": "8380ab548bd2e1c27335bb48169a3e1740309b0b0a8c562db1e51901edaef96a",
     "plugins/workwork/skills/manage-workwork-chats/SKILL.md": "ba926ef9f592b583d78cd1dbf284ffca579c32cdd135cef343f6e09b857c53a8",
+    "plugins/workwork/skills/generate-workwork-sources/SKILL.md": "4c8b87ee741b05a8799ed1ba4f608eff09bb7f21517c2d35aaa67f0cc982f7c6",
+    "plugins/workwork/skills/generate-workwork-sources/agents/openai.yaml": "6fea9c4bcc6ac7ee1d8dc51350da5991fca26589a7257a2fe201fc25309fd66f",
     "scripts/install-workwork-plugin.sh": "7b03f4e8e5418be5676402a925400ff35668ecf2e453751f5bad0e16a851071f",
-    "scripts/package-workwork-claude-plugin.mjs": "cd5d392b0460dd3a51cf15644335a302c05ef9b760486309363d67171c2edcb7",
-    "plugins/workwork/.codex-plugin/plugin.json": "49891ca8eb9ee96a2293ad091b71a3c33a6ab143efdc244ebe83c62c9672e3ea"
+    "scripts/package-workwork-claude-plugin.mjs": "31e68449c8abd49852f0dac2ba3d16f77cad2f11bc984035603861a867ee9420",
+    "plugins/workwork/.codex-plugin/plugin.json": "5f98e2cd2229b638ce915b0bc3e3f74c6563cf6ba5b04bd3e7e9692a2cf7519f"
   }
 }

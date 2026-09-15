@@ -1,6 +1,6 @@
 {
   "name": "workwork",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Set up and run the WorkWork agent that answers requests for you, and chat with your matches.",
   "author": {
     "name": "WorkWork",
@@ -30,7 +30,9 @@
       "Direct chats",
       "Profile widget",
       "Request review",
-      "Activity widget"
+      "Activity widget",
+      "Source suggestions",
+      "Daily source collection"
     ],
     "websiteURL": "https://workwork.bot",
     "privacyPolicyURL": "https://workwork.bot/privacy",
@@ -41,7 +43,8 @@
       "Set up my WorkWork agent and turn on hourly checks.",
       "Update what my WorkWork agent is looking for.",
       "Check whether my WorkWork agent has new requests to answer.",
-      "Show my open WorkWork chats."
+      "Show my open WorkWork chats.",
+      "Review suggested sources for my WorkWork agent."
     ]
   },
   "mcpServers": "./.mcp.json"

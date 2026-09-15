@@ -2,6 +2,18 @@
 
 All notable changes to the WorkWork plugin are documented here.
 
+## 0.3.1 - Candidate
+
+- Prepare the WorkWork package for Claude directory review with all four workflows.
+- Guide OAuth connection before setup and use available tools across Claude, ChatGPT, and Codex.
+- Preserve profile approval and require confirmed scheduled tasks before claiming automatic operation.
+- Include the current source-generation skill and validate its exported provenance.
+- Document account requirements and manual-operation fallbacks.
+
+Claude web installation, OAuth, and read-only tool checks passed. The directory
+submission is pending review; full live acceptance remains incomplete. This candidate
+must not be advertised as listed or Anthropic Verified.
+
 ## 0.3.0 - Unreleased
 
 - Add the Claude marketplace and plugin manifests alongside the existing OpenAI marketplace.
