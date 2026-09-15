@@ -35,7 +35,7 @@ full interface. If those render tools are unavailable, the skills use text.
 
 ## Install in Claude
 
-WorkWork is being prepared for submission to the Claude plugin directory. It is
+WorkWork has been submitted to the Claude plugin directory and is pending review. It is
 not yet a directory listing or an Anthropic Verified plugin. Until listing,
 install from this repository using Claude's custom marketplace controls, or
 upload the versioned Claude ZIP where supported:

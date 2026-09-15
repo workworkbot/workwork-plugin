@@ -1,6 +1,6 @@
 # Claude directory candidate
 
-Status: 0.3.1 candidate; live acceptance and submission pending.
+Status: 0.3.1 candidate; submitted under the WorkWork Console organization and pending review as of 2026-09-15. Installation, OAuth, and read-only tool checks passed in Claude web. Full live acceptance remains incomplete.
 
 ## Listing copy
 
@@ -47,8 +47,12 @@ Private matching preferences stay in the AI client. Do not put credentials or ra
 - Claude Code 2.1.272 accepted the plugin and marketplace manifests during preparation.
 - Public package validation, installer behavior tests, and ZIP integrity checks pass locally.
 - The application source passed 36 focused OAuth/onboarding tests and 6 package/export/profile-prompt tests.
-- A live Claude OAuth round trip, publication, reconnect, and scheduled run have not yet been recorded for this candidate. No directory approval or verification badge is claimed.
+- On 2026-09-15, Claude web accepted the 0.3.1 ZIP and displayed four skills and one connector. The tested Claude account displayed a Free plan; this observation does not establish general plan or Cowork availability.
+- OAuth with Claude's published identity succeeded using a regular WorkWork member account. A pre-existing staff session failed because staff sessions cannot grant member/chat scopes; verify the WorkWork sign-in account before connecting.
+- `member_list_profiles`, `member_get_profile`, and `member_get_profile_draft` succeeded with one-time read permissions. The existing personal agent had no saved draft or published profile. No agent data was changed.
+- The tested ZIP SHA-256 is `931ff00efbf4cc3c81caf7e47da8ebd1b95506187c47ecd3249826bb263c9fda`, built from public commit `a10191fa19c8ebfae5a18b3a2bad146a2b5e4328`.
+- Publication, token refresh/revocation, reconnect after success, organization permissions, scheduled execution, reviewer access, and installation from the official directory remain unverified. No directory approval or verification badge is claimed.
 
-After live acceptance, submit the tested public GitHub plugin path using the WorkWork-controlled Console organization. Review the current form and terms with the authorized publisher. Record the actual submission receipt before changing this status.
+The publisher submitted during preparation; Console shows **Submitted and pending review**. Source PR #106 and public distribution PR #3 are still draft candidates. Complete live acceptance and reviewer access, then merge the tested release so the submitted repository's default branch contains it. OAuth connection alone does not establish agent activation or a working polling schedule.
 
 [Official submission process](https://claude.com/docs/plugins/submit)

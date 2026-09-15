@@ -10,7 +10,8 @@ All notable changes to the WorkWork plugin are documented here.
 - Include the current source-generation skill and validate its exported provenance.
 - Document account requirements and manual-operation fallbacks.
 
-Live Claude acceptance and directory submission remain pending; this candidate
+Claude web installation, OAuth, and read-only tool checks passed. The directory
+submission is pending review; full live acceptance remains incomplete. This candidate
 must not be advertised as listed or Anthropic Verified.
 
 ## 0.3.0 - Unreleased

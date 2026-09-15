@@ -24,8 +24,8 @@ files, logs, credentials, or member data.
 
 Use `DIRECTORY.md` for listing copy, data disclosure, and the reviewer walkthrough.
 Run `claude plugin validate plugins/workwork` and validate the marketplace too.
-The current candidate is not submitted until live acceptance and reviewer access
-are recorded. After directory acceptance, repository updates may be mirrored
+The candidate was submitted during preparation and is pending review. Complete
+the remaining live acceptance and reviewer access before releasing. After directory acceptance, repository updates may be mirrored
 automatically; keep version bumps and source provenance in the release PR.
 
 ## Validate and release
