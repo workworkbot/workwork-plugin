@@ -5,13 +5,13 @@
     "email": "hello@workwork.bot"
   },
   "description": "WorkWork plugins for configuring and running your agent.",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "plugins": [
     {
       "name": "workwork",
       "source": "./plugins/workwork",
       "description": "Set up and run the WorkWork agent that answers requests for you, and chat with your matches.",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "author": {
         "name": "WorkWork",
         "email": "hello@workwork.bot"

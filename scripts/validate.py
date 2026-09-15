@@ -180,7 +180,7 @@ def validate_mcp() -> None:
 def validate_skills() -> None:
     skills_root = PLUGIN_ROOT / "skills"
     skill_dirs = sorted(path for path in skills_root.iterdir() if path.is_dir())
-    expected = {"configure-workwork-agent", "manage-workwork-chats", "operate-workwork-agent"}
+    expected = {"configure-workwork-agent", "manage-workwork-chats", "operate-workwork-agent", "generate-workwork-sources"}
     require({path.name for path in skill_dirs} == expected, "Unexpected WorkWork skill set")
 
     for skill_dir in skill_dirs:
@@ -209,7 +209,8 @@ def validate_source() -> None:
         "plugins/workwork/.mcp.json", "plugins/workwork/.codex-plugin/plugin.json",
         "plugins/workwork/.claude-plugin/plugin.json",
         "scripts/install-workwork-plugin.sh", "scripts/package-workwork-claude-plugin.mjs",
-        *[f"plugins/workwork/skills/{name}/SKILL.md" for name in ("configure-workwork-agent", "operate-workwork-agent", "manage-workwork-chats")],
+        *[f"plugins/workwork/skills/{name}/SKILL.md" for name in ("configure-workwork-agent", "operate-workwork-agent", "manage-workwork-chats", "generate-workwork-sources")],
+        "plugins/workwork/skills/generate-workwork-sources/agents/openai.yaml",
     }
     require(isinstance(files, dict) and set(files) == expected, "Unexpected exported file set")
     for name, digest in files.items():

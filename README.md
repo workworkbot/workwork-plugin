@@ -1,12 +1,13 @@
 # WorkWork plugin
 
 The official distribution repository for the WorkWork plugin for Claude,
-ChatGPT, and Codex. The plugin bundles three guided workflows with the
+ChatGPT, and Codex. The plugin bundles four guided workflows with the
 OAuth-protected WorkWork MCP server:
 
 - configure a personal or organization WorkWork agent;
 - safely process network requests and scheduled checks;
-- read and manage conversations with matches.
+- read and manage conversations with matches;
+- review suggested public feeds and optionally collect relevant public listings.
 
 The WorkWork application and member data remain hosted by WorkWork. This
 repository contains only the installable plugin package, marketplace metadata,
@@ -34,19 +35,45 @@ full interface. If those render tools are unavailable, the skills use text.
 
 ## Install in Claude
 
-In Claude Desktop, open **Customize → Plugins → Add → Add marketplace** and add:
+WorkWork is being prepared for submission to the Claude plugin directory. It is
+not yet a directory listing or an Anthropic Verified plugin. Until listing,
+install from this repository using Claude's custom marketplace controls, or
+upload the versioned Claude ZIP where supported:
 
 ```text
 https://github.com/workworkbot/workwork-plugin
 ```
 
-Install **WorkWork**, start a new chat, and ask:
+In Claude, open **Customize → Plugins**, add the marketplace, and install
+**WorkWork**. Start a new conversation and ask:
 
-> Set up my WorkWork agent and turn on hourly checks.
+> Set up my WorkWork agent.
 
-Claude asks you to sign in to WorkWork when it connects the hosted MCP server.
-No local server or command-line setup is required. The same marketplace also
-works in Claude Cowork.
+Connect the WorkWork connector and sign in to your **WorkWork account** when
+prompted. Your Claude account name does not determine which WorkWork agent is
+connected. WorkWork currently requires an invitation; visit
+[Join WorkWork](https://app.workwork.bot/join) or contact
+[hello@workwork.bot](mailto:hello@workwork.bot) for access. No API keys, private
+agent links, local server, or terminal commands are needed for Claude chat setup.
+
+Claude prepares a draft, shows the saved preview, and publishes only after you
+approve it. You can then ask **Check WorkWork**, **Show source suggestions**, or
+**Show my WorkWork chats**. Source suggestions require separate approval.
+Additional search services are optional; the plugin does not install X,
+LinkedIn, or Google Search connectors on your behalf.
+
+Plugins require a supported paid Claude plan. Recurring checks use Cowork
+scheduling when available. Each scheduled task must have the WorkWork connector,
+the intended agent, and any separately approved search tools in its own context.
+If scheduling is unavailable, manual checks still work. A saved profile or a
+heartbeat does not prove that an automatic task was scheduled.
+
+For Claude Code, add the same marketplace and install `workwork@workwork`.
+Authenticate the WorkWork MCP connection when prompted. Scheduling is optional;
+do not assume a Claude Code session has Cowork scheduling tools.
+
+See [Claude's plugin guide](https://support.claude.com/en/articles/13837440-use-plugins-in-claude)
+for current availability and installation controls.
 
 ## Install in ChatGPT or Codex
 
@@ -123,7 +150,7 @@ bash -n scripts/install-workwork-plugin.sh
 bash tests/test-installer.sh
 node scripts/package-workwork-claude-plugin.mjs \
   --output /tmp/workwork-claude-plugin.zip \
-  --version 0.3.0
+  --version 0.3.1
 ```
 
 CI runs the same checks for every push and pull request. See
