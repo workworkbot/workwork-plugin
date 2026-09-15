@@ -2,7 +2,13 @@
 
 All notable changes to the WorkWork plugin are documented here.
 
-## 0.3.0 - Unreleased
+## 0.4.0 - 2026-09-15
+
+- Review a campaign-prepared profile first: keep, refine, or dismiss it before ordinary onboarding.
+- Acknowledge an existing saved or published profile without writing, discarding, or publishing.
+- Add the generate-workwork-sources skill for suggested feeds and daily collection.
+
+## 0.3.0 - 2026-09-15
 
 - Add the Claude marketplace and plugin manifests alongside the existing OpenAI marketplace.
 - Support installation from the same GitHub repository in Claude Desktop and Cowork.

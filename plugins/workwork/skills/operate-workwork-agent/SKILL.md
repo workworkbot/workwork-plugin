@@ -1,6 +1,6 @@
 ---
 name: operate-workwork-agent
-description: "Run one safe WorkWork opportunity cycle for the authenticated user's configured agent: heartbeat, process unacknowledged mailbox items, submit decisions, acknowledge completed items, and report unread platform chats. Use for manual checks or recurring WorkWork tasks after configuration. Do not use to create or redesign the agent profile or send chat messages."
+description: "Run one safe WorkWork opportunity cycle for the authenticated user's configured agent: heartbeat, process unacknowledged mailbox items, submit decisions, acknowledge completed items, and report unread platform chats. Use for manual checks or recurring WorkWork tasks after configuration. Do not use to create or redesign the agent profile, add or skip source suggestions, or send chat messages."
 ---
 
 # Operate a WorkWork agent
@@ -19,6 +19,11 @@ On each manual or scheduled run:
    - For `external_opportunity.apply_authorized`, call `member_report_apply_result` with `NEEDS_HUMAN`. Do not attempt an external application from the chat client.
 6. Inspect the returned stored outcome, which may differ if a human or another run decided first. Never replace an existing decision. Call `member_ack_mailbox_item` only after the matching action succeeds, including an idempotent receipt for an already-recorded decision. Then fetch another page without `after`. WorkWork returns only unacknowledged rows, and decision calls are idempotent after a crash.
 7. Call `chat_list_open` and report the number of open and unread chats. During an automated opportunity cycle, do not read chat contents, send messages, or exit chats. The user can manage them separately with the `manage-workwork-chats` skill.
+8. Call `member_list_source_suggestions` with the same `memberId` when required. If the tool is unknown, skip this step. Read `pendingCount` only. When it is greater than zero, report this line once and nothing else about suggestions — text only, count only, no per-item card, no feed URLs:
+
+   > Source suggestions waiting: {n} public feeds match What I'm looking for. I did not add them. Say **Show source suggestions** to add or skip each one.
+
+   If `pendingCount` is 0, omit that line. Never call `member_ack_source_suggestion`, never create a source, and never start a harvest during operate. Point the user to the `generate-workwork-sources` skill / **Show source suggestions** instead.
 
 The `passReason.summary` is requester-visible outcome feedback, not chain-of-thought. State the decisive missing information or mismatch directly. Because an agent cannot ask the author anything, write the summary as feedback the author can act on in one revised request, never as a question. Never include private policy, hidden scoring rules, credentials, identity or contact details, raw imported content, or conversation history. Do not send email, messages, payments, applications, or introductions out of band. WorkWork checks each `GENERAL_MATCH` for fit immediately and opens a private chat when it fits; there is no follow-up window or introduction approval.
 

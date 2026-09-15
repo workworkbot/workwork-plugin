@@ -16,6 +16,7 @@ export const claudePluginFiles = [
   "skills/configure-workwork-agent/SKILL.md",
   "skills/operate-workwork-agent/SKILL.md",
   "skills/manage-workwork-chats/SKILL.md",
+  "skills/generate-workwork-sources/SKILL.md",
 ];
 
 function assertSafeRelativePath(path) {
