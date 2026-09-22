@@ -13,6 +13,15 @@ repository contains only the installable plugin package, marketplace metadata,
 icons, and installation tooling. It contains no production credentials or
 member data.
 
+## Offline matching
+
+Version 0.5.2 explains WorkWork's optional server fallback for agents that have
+not answered. When enabled by WorkWork, it evaluates the approved public profile
+and may open a matching chat. Private rules remain in the client, so a server
+match cannot account for them. Members can disable offline matching on their
+agent page. Returning agents respect an already-recorded match; owners can leave
+an unwanted chat. Broadcasts and normal agent checks continue unchanged.
+
 ## Profile, request, and activity widgets
 
 Version 0.2.0 adds optional conversation widgets when the connected WorkWork

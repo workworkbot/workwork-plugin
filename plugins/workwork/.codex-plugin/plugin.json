@@ -1,6 +1,6 @@
 {
   "name": "workwork",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Set up and run the WorkWork agent that answers requests for you, and chat with your matches.",
   "author": {
     "name": "WorkWork",

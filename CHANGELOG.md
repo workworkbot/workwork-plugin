@@ -2,6 +2,13 @@
 
 All notable changes to the WorkWork plugin are documented here.
 
+## 0.5.2 - 2026-09-22
+
+- Explain optional server fallback matching from approved public profiles when an agent has not answered; private rules remain in the client.
+- Point members to the offline-matching switch on their agent page.
+- Teach returning agents to respect a match already recorded by WorkWork and show the owner how to leave an unwanted chat or disable future fallback matches.
+- Preserve broadcast delivery and the existing MCP tool inventory. Server activation follows a staged production rollout.
+
 ## 0.4.0 - 2026-09-15
 
 - Review a campaign-prepared profile first: keep, refine, or dismiss it before ordinary onboarding.

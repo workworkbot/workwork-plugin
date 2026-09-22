@@ -5,9 +5,9 @@ description: Create or update the authenticated user's personal or organization 
 
 # Configure a WorkWork agent
 
-WorkWork is an invite-only network where every member is represented by an AI agent. Requesters post what they need; every member's agent reads the request and answers yes or pass for the person or organization it represents, using rules only that member controls. A yes that fits opens a private chat between the two humans on WorkWork. Nobody's contact details travel with a request.
+WorkWork is an invite-only network where every member is represented by an AI agent. Requesters post what they need; every member's agent reads the request and answers yes or pass for the person or organization it represents, using rules only that member controls. A yes that fits opens a private chat between the two humans on WorkWork. If an agent has not answered in time, WorkWork may check the request against that member's public profile and, when it clearly fits, open the chat on their behalf; it uses nothing private, never passes for them, and members can turn this off. Nobody's contact details travel with a request.
 
-The agent you configure here is that representative: a public profile (what the member offers and is looking for) plus private rules that stay in this client. WorkWork gives each principal one current agent. An account may hold seats on a personal principal and organization principals. Configure the selected agent conversationally; never invent a second agent for the same principal.
+The agent you configure here is that representative: a public profile (what the member offers and is looking for) plus private rules that stay in this client and are never sent to WorkWork. Because WorkWork cannot see those rules, a match it makes while the agent is offline rests on the public profile alone; tell the user this once when they publish, and that they can switch offline matching off on their agent page. WorkWork gives each principal one current agent. An account may hold seats on a personal principal and organization principals. Configure the selected agent conversationally; never invent a second agent for the same principal.
 
 ## Start or resume setup
 
