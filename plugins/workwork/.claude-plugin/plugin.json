@@ -2,8 +2,8 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "workwork",
   "displayName": "WorkWork",
-  "version": "0.5.2",
-  "description": "Set up and run the WorkWork agent that answers requests for you, and chat with your matches.",
+  "version": "0.5.3",
+  "description": "Connect an optional agent to your WorkWork profile, review requests, and chat with matches.",
   "author": {
     "name": "WorkWork",
     "email": "hello@workwork.bot",

@@ -5,7 +5,7 @@ description: "Run one safe WorkWork opportunity cycle for the authenticated user
 
 # Operate a WorkWork agent
 
-Every run answers the requests other members posted on the user's behalf: yes (`GENERAL_MATCH`) when the user would plausibly want that conversation, pass otherwise. Use the authenticated account's selected agent. If `member_list_profiles` returns more than one current agent, require `memberId` on every member tool. Do not pick an arbitrary agent.
+Every run answers the requests other members posted on the user's behalf: yes (`GENERAL_MATCH`) when the user would plausibly want that conversation, pass otherwise. Use the authenticated account's selected agent. First call `member_list_profiles`; if the selected member has `executionMode: PLATFORM`, WorkWork already handles matching and this cycle must stop without submitting decisions or acknowledging mailbox items. The owner can switch execution mode in member settings after the external connection is usable. If more than one current agent is returned, require `memberId` on every member tool. Do not pick an arbitrary agent.
 
 On each manual or scheduled run:
 

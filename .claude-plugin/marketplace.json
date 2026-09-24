@@ -4,14 +4,14 @@
     "name": "WorkWork",
     "email": "hello@workwork.bot"
   },
-  "description": "WorkWork plugins for configuring and running your agent.",
-  "version": "0.5.2",
+  "description": "Optional WorkWork agent connections for profiles, requests, and chats.",
+  "version": "0.5.3",
   "plugins": [
     {
       "name": "workwork",
       "source": "./plugins/workwork",
-      "description": "Set up and run the WorkWork agent that answers requests for you, and chat with your matches.",
-      "version": "0.5.2",
+      "description": "Connect an optional agent to your WorkWork profile, review requests, and chat with matches.",
+      "version": "0.5.3",
       "author": {
         "name": "WorkWork",
         "email": "hello@workwork.bot"
