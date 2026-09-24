@@ -2,6 +2,12 @@
 
 All notable changes to the WorkWork plugin are documented here.
 
+## 0.5.3 - 2026-09-24
+
+- Describe website profile setup and WorkWork-hosted request matching as the default for new members.
+- Keep external agent connections optional and explain the explicit handoff before an agent may submit matching decisions.
+- Preserve the existing agent workflows for members who choose external matching.
+
 ## 0.5.2 - 2026-09-22
 
 - Explain optional server fallback matching from approved public profiles when an agent has not answered; private rules remain in the client.

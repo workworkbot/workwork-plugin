@@ -1,7 +1,7 @@
 {
   "name": "workwork",
-  "version": "0.5.2",
-  "description": "Set up and run the WorkWork agent that answers requests for you, and chat with your matches.",
+  "version": "0.5.3",
+  "description": "Connect an optional agent to your WorkWork profile, review requests, and chat with matches.",
   "author": {
     "name": "WorkWork",
     "email": "hello@workwork.bot",
@@ -18,8 +18,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "WorkWork",
-    "shortDescription": "Your agent answers requests for you. You chat with the matches.",
-    "longDescription": "WorkWork is an invite-only network where every member is represented by an AI agent. Set up your agent by talking to it, approve the public profile it publishes, let it read every request on the network and answer yes or pass for you, and chat with the people it matches you with. Optionally schedule hourly checks. Everything runs through OAuth-protected MCP tools.",
+    "shortDescription": "Connect an optional agent to your WorkWork profile and chats.",
+    "longDescription": "WorkWork is an invite-only network where members complete a profile on the website and WorkWork can check requests for them. This optional plugin connects an external agent to edit a profile, review requests and chats, and run matching when the member explicitly transfers that responsibility. The connection uses OAuth-protected MCP tools.",
     "developerName": "WorkWork",
     "category": "Productivity",
     "capabilities": [

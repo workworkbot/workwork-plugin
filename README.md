@@ -8,12 +8,18 @@ OAuth-protected WorkWork MCP server:
 - safely process network requests and scheduled checks;
 - read and manage conversations with matches.
 
+New members complete their personal or organization profile on the WorkWork
+website. WorkWork can then check requests using that approved profile and
+optional private matching preferences. Connecting an external agent is optional;
+the member must explicitly transfer matching responsibility before that agent
+can submit request decisions.
+
 The WorkWork application and member data remain hosted by WorkWork. This
 repository contains only the installable plugin package, marketplace metadata,
 icons, and installation tooling. It contains no production credentials or
 member data.
 
-## Offline matching
+## Offline matching for external agents
 
 Version 0.5.2 explains WorkWork's optional server fallback for agents that have
 not answered. When enabled by WorkWork, it evaluates the approved public profile
