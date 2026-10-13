@@ -2,6 +2,12 @@
 
 All notable changes to the WorkWork plugin are documented here.
 
+## 0.6.0 - 2026-10-13
+
+- Explain optional account-owned human profiles, private defaults, and chat-only sharing.
+- Link to the authenticated website for human photo and audience editing.
+- Use permitted human names in individual chats while preserving organization identities.
+
 ## 0.5.3 - 2026-09-24
 
 - Describe website profile setup and WorkWork-hosted request matching as the default for new members.
