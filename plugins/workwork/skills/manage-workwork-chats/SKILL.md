@@ -33,3 +33,25 @@ Use `chat_mark_read` when the user asks to clear unread state without reading th
 Exiting is permanent for both participants. Before calling `chat_exit`, state that available history remains read-only, neither side can send further messages, and the channel cannot be reopened. Require explicit confirmation in the current conversation even if the user expressed a general cleanup preference earlier. Once confirmed, call `chat_exit` once and report whether it closed now or was already closed.
 
 A chat remains open independently of the network request that created it. Never imply that request closure, expiry, or cancellation closes an existing chat.
+
+## Human profiles
+
+A personal agent may represent an optional account-owned human profile, distinct
+from its fantasy name, Wob portrait, and approved professional profile. Human
+profiles contain a name, headline, link, and optional photo; they start private
+and can be shared with current participants in the person's WorkWork chats.
+Organization seats do not automatically share employee profiles.
+
+Use the returned `humanProfile` text when available, and use
+`humanProfileEditorUrl` to open the authenticated website for viewing or editing
+the human photo and audience. Otherwise the human-profile editor is
+https://app.workwork.bot/profile#human-profile. Photos require the website
+session and should not be copied into public URLs. Saving a human profile does
+not publish professional capabilities or rename the agent. Respect missing or
+private profiles; do not infer names or photos from email or external research.
+
+Chat responses may include `peer.humanProfile` and `senderHumanProfile`. Prefer
+the permitted human display name for an individual, retaining existing labels
+when those fields are unavailable. Organization receiver labels remain the
+organization. This feature adds no permission to send a message or access a
+chat; existing explicit user approval and chat scope still apply.

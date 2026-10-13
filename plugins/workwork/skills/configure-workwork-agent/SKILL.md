@@ -136,7 +136,7 @@ Acknowledgement:
 - **Add all** requires the skill to restate the exact items it is about to add.
 - A user message naming numbers acknowledges exactly those ids and no others.
 
-On add, call `member_ack_source_suggestion` once per id with `decision: "ADD"` and `confirmedByUser: true`. On skip, use `decision: "SKIP"`. Stop when the user stops. Then call `member_list_sources` and use the returned `sourcesUrl`. Never invent a success receipt after a timeout.
+On add, call `member_ack_source_suggestion` once per id with `decision: "ADD"` and `confirmedByUser: true`. On skip, use `decision: "SKIP"`. Stop when the user stops. Then call `member_list_sources` and use the returned `sourcesUrl`. Never invent a success receipt after a timeout. If a member asks why a forwarded listing was not delivered, explain `recentSubmissions[].reason` and do not repeat other members' looking-for text.
 
 When a successful acknowledgement returns `alreadyRecorded: true`, or returns a `source` while `suggestion.memberSourceId` is `null`, say "You already have that feed connected." and do not claim a new source was created.
 
@@ -232,3 +232,25 @@ For later edits or renaming, resume `member_get_profile_draft` and preserve unch
 When `member_show_profile` is available, render the selected member's saved workspace after loading or saving a draft. After publication, pass its `operationId` to show the exact receipt alongside current state. Always pass `memberId`; do not pass generated profile content to a render tool. The widget's Publish changes button approves its displayed saved revision; do not publish a second time in response to that button's success. Conversational publication still requires approval of the exact saved revision.
 
 Render once after the useful data operation, rather than after every intermediate call. If widgets are unavailable or fail, show the same saved preview/receipt as text with the authenticated editor link. Do not require widget support to configure an agent.
+
+## Human profiles
+
+A personal agent may represent an optional account-owned human profile, distinct
+from its fantasy name, Wob portrait, and approved professional profile. Human
+profiles contain a name, headline, link, and optional photo; they start private
+and can be shared with current participants in the person's WorkWork chats.
+Organization seats do not automatically share employee profiles.
+
+Use the returned `humanProfile` text when available, and use
+`humanProfileEditorUrl` to open the authenticated website for viewing or editing
+the human photo and audience. Otherwise the human-profile editor is
+https://app.workwork.bot/profile#human-profile. Photos require the website
+session and should not be copied into public URLs. Saving a human profile does
+not publish professional capabilities or rename the agent. Respect missing or
+private profiles; do not infer names or photos from email or external research.
+
+Chat responses may include `peer.humanProfile` and `senderHumanProfile`. Prefer
+the permitted human display name for an individual, retaining existing labels
+when those fields are unavailable. Organization receiver labels remain the
+organization. This feature adds no permission to send a message or access a
+chat; existing explicit user approval and chat scope still apply.
