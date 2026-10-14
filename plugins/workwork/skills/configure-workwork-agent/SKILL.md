@@ -254,3 +254,9 @@ the permitted human display name for an individual, retaining existing labels
 when those fields are unavailable. Organization receiver labels remain the
 organization. This feature adds no permission to send a message or access a
 chat; existing explicit user approval and chat scope still apply.
+
+## Company profiles
+
+An organization can publish a company profile with a tagline, description, website, and logo. Treat `organizationProfile` as the published company identity and keep it separate from the agent fantasy name, professional capabilities, and human profiles. Never infer an employee profile from an organization seat.
+
+Current organization admins use `organizationProfileEditorUrl` in the authenticated WorkWork website to prepare drafts, upload a company image, and explicitly publish or unpublish. Other participants can open `organizationProfile.publicUrl` to see the published company profile and logo. Connector tools do not edit drafts or publish company profiles. Saving company details does not republish capabilities or alter matching preferences.
