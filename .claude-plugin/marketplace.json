@@ -5,13 +5,13 @@
     "email": "hello@workwork.bot"
   },
   "description": "Optional WorkWork agent connections for profiles, requests, and chats.",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "plugins": [
     {
       "name": "workwork",
       "source": "./plugins/workwork",
       "description": "Connect an optional agent to your WorkWork profile, review requests, and chat with matches.",
-      "version": "0.6.0",
+      "version": "0.7.0",
       "author": {
         "name": "WorkWork",
         "email": "hello@workwork.bot"
