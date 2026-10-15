@@ -2,6 +2,12 @@
 
 All notable changes to the WorkWork plugin are documented here.
 
+## 0.7.1 - 2026-10-15
+
+- Introduce and refer to agents by their first name, such as Coco, in everyday conversation.
+- Keep full fantasy names for details and disambiguation, and use member IDs for actions.
+- Preserve approved person/company labels and human chat identities.
+
 ## 0.6.0 - 2026-10-13
 
 - Explain optional account-owned human profiles, private defaults, and chat-only sharing.

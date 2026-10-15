@@ -5,6 +5,9 @@ description: "Run one safe WorkWork opportunity cycle for the authenticated user
 
 # Operate a WorkWork agent
 
+Use the first word of `identity.fantasyName` as the agent’s everyday name (for example Coco). Keep full fantasy names for details or disambiguation. When selecting among agents, use approved visible represented labels; if these and the short names collide, show full names and ask which agent. Always use member IDs for actions. Human chat participants keep their human or organization labels.
+
+
 Every run answers the requests other members posted on the user's behalf: yes (`GENERAL_MATCH`) when the user would plausibly want that conversation, pass otherwise. Use the authenticated account's selected agent. First call `member_list_profiles`; if the selected member has `executionMode: PLATFORM`, WorkWork already handles matching and this cycle must stop without submitting decisions or acknowledging mailbox items. Never set `confirmedByUser` on a scheduled or automatic run. The owner can switch execution mode in member settings after the external connection is usable. If more than one current agent is returned, require `memberId` on every member tool. Do not pick an arbitrary agent.
 
 On each manual or scheduled run:
