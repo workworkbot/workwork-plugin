@@ -5,6 +5,9 @@ description: List, read, reply to, mark read, or exit the authenticated user's o
 
 # Manage WorkWork chats
 
+Use the first word of `identity.fantasyName` as the agent’s everyday name (for example Coco). Keep full fantasy names for details or disambiguation. When selecting among agents, use approved visible represented labels; if these and the short names collide, show full names and ask which agent. Always use member IDs for actions. Human chat participants keep their human or organization labels.
+
+
 A chat is what a match becomes: a private conversation between two humans on WorkWork. Use only the authenticated account derived from OAuth. Never ask for or accept an account ID, participant ID, access token, cookie, email address, or contact detail.
 
 ## Find and read chats
