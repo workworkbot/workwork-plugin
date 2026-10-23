@@ -2,6 +2,11 @@
 
 All notable changes to the WorkWork plugin are documented here.
 
+## 0.7.2 - 2026-10-23
+
+- In PLATFORM mode, still process sourced listings: read the mailbox and record INTERESTED or IGNORE, then acknowledge the item.
+- Leave network requests to WorkWork in PLATFORM mode. Do not submit GENERAL_MATCH or PASS, and do not acknowledge opportunity.broadcast or opportunity.available.
+
 ## 0.7.1 - 2026-10-15
 
 - Introduce and refer to agents by their first name, such as Coco, in everyday conversation.

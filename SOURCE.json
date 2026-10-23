@@ -1,18 +1,18 @@
 {
-  "version": "0.7.1",
-  "sourceCommit": "31a503b9bcbf2063363a5a35c7caacd6ca622585",
+  "version": "0.7.2",
+  "sourceCommit": "2f53257b2663a2962a4fb70e158ac2afe9b30801",
   "sourceDirty": false,
   "files": {
-    ".claude-plugin/marketplace.json": "7e38381263f05b0a936f68ee6e3cc9c7fb8ede423b432d6804ebc94dfd45ea9f",
+    ".claude-plugin/marketplace.json": "a48eb33493c0c441c6ba474056c8b97051eaaf6361f1fa4c2979d08ce749637f",
     "plugins/workwork/.mcp.json": "2282fc782109018f22b6946e980c9dcd0010ccc94ac2895f79b18bf9d5bbc09b",
-    "plugins/workwork/.claude-plugin/plugin.json": "3dcd86b9b3493686597743541b642409fc18da99ea7154deec3e60e17810d5ca",
+    "plugins/workwork/.claude-plugin/plugin.json": "e8389728fae0881b686c5f2ea974e717ea56d49552fb81d851eb74025f393c7f",
     "plugins/workwork/skills/configure-workwork-agent/SKILL.md": "6886b64630c14d36bb1ae7ac4b889b0528ce9e67219f6bfdfe79080ba22d6032",
-    "plugins/workwork/skills/operate-workwork-agent/SKILL.md": "b6db4ffd7d76b4b60c1e565d8867b6720a796100e347a741afaeb66011621cee",
+    "plugins/workwork/skills/operate-workwork-agent/SKILL.md": "f4a66b0222f03716c28f9067f95eadaf72d6a6c9943253083d4af522c31e1a56",
     "plugins/workwork/skills/manage-workwork-chats/SKILL.md": "2dfcae91b780e3b9335d4c0cbab0d29d6133f768caa38027a1c98bea604aa782",
     "plugins/workwork/skills/generate-workwork-sources/SKILL.md": "fac220083f5e66d85a9b79fd295637b572a8a08a604d694e75a0f3f24ac3b70a",
     "plugins/workwork/skills/generate-workwork-sources/agents/openai.yaml": "6fea9c4bcc6ac7ee1d8dc51350da5991fca26589a7257a2fe201fc25309fd66f",
     "scripts/install-workwork-plugin.sh": "7b03f4e8e5418be5676402a925400ff35668ecf2e453751f5bad0e16a851071f",
     "scripts/package-workwork-claude-plugin.mjs": "31e68449c8abd49852f0dac2ba3d16f77cad2f11bc984035603861a867ee9420",
-    "plugins/workwork/.codex-plugin/plugin.json": "2aeb711d8e9486d4a5f299080d3fa9d373ac3b16f9a78feaf5e47a8b33a6d67f"
+    "plugins/workwork/.codex-plugin/plugin.json": "d538695c89dad6ca67558ae0cb2354cc3182953a263e8fd0fd6965cde4720503"
   }
 }
